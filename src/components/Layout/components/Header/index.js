@@ -13,7 +13,9 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
+import { Link } from 'react-router-dom';
 
+import routesConfig from '~/config/routes';
 import Menu from '~/components/Popper/Menu';
 import Button from '~/components/Button';
 import styles from './Header.module.scss';
@@ -89,7 +91,9 @@ function Header() {
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <img src={images.logo} alt="tiktok"></img>
+                <Link to={routesConfig.home} className={cx('logo-link')}>
+                    <img src={images.logo} alt="tiktok"></img>
+                </Link>
 
                 <Search />
 
@@ -121,19 +125,21 @@ function Header() {
                             <Button primary>Log in</Button>
                         </>
                     )}
-                    <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
-                        {currentUser ? (
-                            <Image
-                                className={cx('user-avatar')}
-                                src="https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/f89b316574f8f0ab300e20d4b7ff6a29~c5_100x100.jpeg?x-expires=1663063200&x-signature=Nn8cO9CVnxuz10Z55IU6bj0svug%3D"
-                                alt="Nguyen Van A"
-                            />
-                        ) : (
-                            <button className={cx('more-btn')}>
-                                <FontAwesomeIcon icon={faEllipsisVertical} />
-                            </button>
-                        )}
-                    </Menu>
+                    <div>
+                        <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
+                            {currentUser ? (
+                                <Image
+                                    className={cx('user-avatar')}
+                                    src="https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/f89b316574f8f0ab300e20d4b7ff6a29~c5_100x100.jpeg?x-expires=1663063200&x-signature=Nn8cO9CVnxuz10Z55IU6bj0svug%3D"
+                                    alt="Nguyen Van A"
+                                />
+                            ) : (
+                                <button className={cx('more-btn')}>
+                                    <FontAwesomeIcon icon={faEllipsisVertical} />
+                                </button>
+                            )}
+                        </Menu>
+                    </div>
                 </div>
             </div>
         </header>
